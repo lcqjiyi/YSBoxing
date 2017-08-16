@@ -1,0 +1,199 @@
+﻿@model IEnumerable<YSBoxing.Core.YS.InputYsOrder>
+
+@{
+    ViewData["Title"] = "导入以纯家居订单";
+    int totaltotal = 0;
+}
+
+<h2>导入以纯家居订单</h2>
+
+<form asp-action="ImportYsOrderPost" method="post"  enctype="multipart/form-data">
+    <div class="form-inline">
+       
+            <div class="form-group">
+                <label class="control-label"> 客户</label>
+                <select name="CustomerId" class="form-control" asp-items="ViewBag.CustomerList"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">订单组</label>
+                <select name="OrderGroupId" class="form-control" asp-items="ViewBag.OrderGroupList"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">EXCEL文件</label>
+                <input type="file" class="form-control" name="ExcelFile" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="导入数据" class="btn btn-default" />
+            </div>
+
+    </div>
+</form>
+<hr />
+<form asp-action="ImportYSOrder" method="get" enctype="multipart/form-data">
+    <div class="form-inline">
+       
+            <div class="form-group">
+                <label class="control-label"> 客户</label>
+                <select name="CustomerId" class="form-control" asp-items="ViewBag.CustomerList"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">订单组</label>
+                <select name="OrderGroupId" class="form-control" asp-items="ViewBag.OrderGroupList"></select>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="查找" class="btn btn-default" />
+            </div>
+        </div>
+  
+</form>
+<div class="row" style="margin-top:10px">
+    <a asp-action="DeleteImportYSOrder" asp-route-CustomerId ="@ViewBag.CustomerId" asp-route-OrderGroupId ="@ViewBag.OrderGroupId" class="btn btn-default">清空当前数据</a>
+    <a asp-action="GenerateOrders" asp-route-CustomerId="@ViewBag.CustomerId" asp-route-OrderGroupId="@ViewBag.OrderGroupId" class="btn btn-default">当前数据生成订单</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.YsOrderNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YsGoodNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Style)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StyleDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qty1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qty2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qty3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qty4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.qty5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.qty6)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.qty7)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.qty8)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.qty9)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.qty10)
+            </th>
+            <th>
+               合计
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsGenerated)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YsOrderNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YsGoodNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Style)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StyleDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qty5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qty6)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qty7)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qty8)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qty9)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qty10)
+                </td>
+                <td>
+                    @{
+                        var total = item.Qty1 + item.Qty2 + item.Qty3 + item.Qty4 + item.qty5 + item.qty6 + item.qty7 + item.qty8 + item.qty9 + item.qty10;
+                        totaltotal += total;
+                     }
+                    @total
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsGenerated)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<div > 合计 @totaltotal </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

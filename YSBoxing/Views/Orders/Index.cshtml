@@ -1,0 +1,64 @@
+﻿@model IEnumerable<YSBoxing.Core.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p style="margin-top:10px">
+    <a asp-action="Create" class="btn btn-default">创建订单</a>
+    <a asp-action="ImportYSOrder" asp-controller="ImportOrder" class="btn btn-default">导入以纯家居订单</a>
+</p>
+<table class="table table-bordered" >
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.JcNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Style)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StyleDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderGroup)
+            </th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JcNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Style)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StyleDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderGroup.GroupName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">编辑</a> |
+                <a asp-action="GetList" asp-controller="OrderItems" asp-route-id="@item.Id">订单列表</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">删除</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

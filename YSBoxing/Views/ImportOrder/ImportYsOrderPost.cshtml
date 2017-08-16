@@ -1,0 +1,153 @@
+@model IEnumerable<YSBoxing.Core.YS.InputYsOrder>
+
+@{
+    ViewData["Title"] = "ImportYsOrderPost";
+}
+
+<h2>ImportYsOrderPost</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderGroupId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.YsOrderNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.YsGoodNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Style)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StyleDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AddressCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AddressName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Qty1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Qty2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Qty3)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Qty4)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.qty5)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.qty6)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.qty7)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.qty8)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.qty9)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.qty10)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsGenerated)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderGroupId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YsOrderNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YsGoodNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Style)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StyleDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty5)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty6)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty7)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty8)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty9)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty10)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsGenerated)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

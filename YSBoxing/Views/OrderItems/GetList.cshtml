@@ -1,0 +1,113 @@
+﻿@model YSBoxing.Core.Order
+@using YSBoxing.Core.ValueObject
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>订单详细信息</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JcNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JcNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Style)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Style)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StyleDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StyleDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.CustomerName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderGroup)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderGroup.GroupName)
+        </dd>
+    </dl>
+</div>
+@{ var total = 0;}
+<table class="table table-bordered" >
+    <tr>
+        <th>订单名称</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>订单件数</th>
+        <th>出货件数</th>
+        <th>箱数</th>
+        <th>出货箱数</th>
+        <th>创建时间</th>
+        <th>细数</th>
+        <th></th>
+    </tr>
+    @foreach (var OrderItem in Model.OrderItems)
+    {
+        total += OrderItem.Qty;
+        <tr>
+            <td>@OrderItem.OrderItemName</td>
+            <td>@OrderItem.OrderInfo1</td>
+            <td>@OrderItem.OrderInfo2</td>
+            <td>@OrderItem.OrderInfo3</td>
+            <td>@OrderItem.OrderOtherInfo</td>
+            <td>@OrderItem.Qty</td>
+            <td>@OrderItem.ShipQty</td>
+            <td>@OrderItem.Box</td>
+            <td>@OrderItem.ShipBox</td>
+            <td>@OrderItem.CreateDate</td>
+            <td>
+               @{ var qtyTable = new QtyTable(OrderItem.OrderItemQtys.ToList()); } 
+                <table class="table-condensed">
+                    <tr>
+                        <td>款式</td>
+                        <td>颜色</td>
+                        @for (int i = 0; i < qtyTable.sizeGroup.sizeCount; i++)
+                        {
+                            <td>@qtyTable.sizeGroup.GetSize(i)</td>
+                        }
+                    </tr>
+                    @foreach (var qtyRow in qtyTable.qtyRows)
+                    {
+                        <tr>
+                            <td>@qtyRow.Style</td>
+                            <td>@qtyRow.Color</td>
+                            @for (int i = 0; i < qtyTable.sizeGroup.sizeCount; i++)
+                            {
+                                <td>@qtyRow.GetQty(i)</td>
+                            }
+                        </tr>
+                    }
+                </table>
+
+            </td>
+            <td><a asp-action="Boxing" asp-controller="OrderItems" asp-route-id="@OrderItem.Id">生成装箱单</a>|
+                <a asp-action="ViewBoxList" asp-controller="OrderItems" asp-route-id="@OrderItem.Id">查看</a> |
+                <a asp-action="DelBoxList" asp-controller="OrderItems" asp-route-id="@OrderItem.Id">删除</a> 
+               
+            </td>
+        </tr>
+    }
+    
+</table> 
+<h3>总件数为 @total</h3>  

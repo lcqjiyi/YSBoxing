@@ -1,0 +1,88 @@
+﻿@model YSBoxing.Core.OrderItem
+@using YSBoxing.Core.ValueObject
+@{
+    ViewData["Title"] = "ViewBoxList";
+    SizeGroup sizeGroup = new SizeGroup(Model.OrderItemQtys.ToList());
+
+}
+
+
+<table class="table-condensed">
+    <tr style="text-align:center"><td><h3> (   中山坚成    )制衣有限公司</h3>  </td></tr>
+    <tr style="text-align:center"><td><h4>装  箱  单</h4> </td></tr>
+    <tr>
+        <td>
+            客户:@Model.OrderInfo1 &emsp;&emsp;
+            款号：@Model.Order.Style  &emsp;&emsp;
+            款式：@Model.Order.StyleDescription
+        </td>
+    </tr>
+    <tr>
+    <tr>
+        <td>
+            货号:@Model.Order.JcNo &emsp;&emsp;
+            箱号：@Model.Box  &emsp;&emsp;
+            件件：@Model.Qty
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="table table-bordered">
+                <tr>
+                    <th>箱号</th>
+                    <th>款式</th>
+                    <th>颜色</th>
+                    @for (int i = 0; i < sizeGroup.sizeCount; i++)
+                    {
+                        <th>@sizeGroup.GetSize(i)</th>
+                    }
+                    <th>件数</th>
+                </tr>
+                @foreach (var item in Model.OrderItemBoxings.OrderBy(o => o.BoxNumber))
+                {
+                    var rows = QtyRow.GetQtyRow(item.OrderItemBoxingQtys.ToList(), sizeGroup);
+                    for (int i = 0; i < rows.Count; i++)
+                    {
+                        <tr>
+                            @if (i == 0)
+                            {
+                                <td rowspan="@rows.Count">@item.BoxNumber</td>
+                            }
+                            <td>@rows[i].Style</td>
+                            <td>@rows[i].Color</td>
+                            @for (int x = 0; x < sizeGroup.sizeCount; x++)
+                            {
+                                if (rows[i].GetQty(x) > 0)
+                                {
+                                    <td>     @rows[i].GetQty(x) </td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+
+                            }
+                            @if (i == 0)
+                            {
+                                <td rowspan="@rows.Count">@item.Qty</td>
+                            }
+                        </tr>
+                    }
+
+                }
+                <tr>
+                    <th></th>
+                    <th></th>
+                    
+                    @for (int i = 0; i < sizeGroup.sizeCount; i++)
+                    {
+                        <th></th>
+                    }
+                    <th>合计</th>
+                    <th>@Model.Qty</th>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+

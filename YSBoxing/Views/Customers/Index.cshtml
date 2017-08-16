@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewData["Title"] = "客户列表";
+}
+
+<div class="row" style="margin-top:10px">
+        <!-- 过滤框 -->
+        <div class="panel panel-default">
+            <div class="panel-heading">查询条件</div>
+            <div class="panel-body">
+                    <div class="form-group" style="margin-top: 15px">
+                        <label class="control-label col-sm-1" for="txt-filter">客户名</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="txt-filter">
+                        </div>
+                        <div class="col-sm-4" style="text-align: left;">
+                            <button type="button" style="margin-left: 50px" id="btn-query" class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    <!-- bootstrap-tablel指定的工具栏 -->
+    <div id="toolbar" class="btn-group">
+        <button id="btn-add" type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn-edit" type="button" class="btn btn-success">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+        </button>
+        <button id="btn-delete" type="button" class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+
+    <!--bootstrap-table表体-->
+    <table id="tb-Customers"></table>
+</div>
+
+
+<div id="add"></div>
+<div id="edit"></div>
+@section scripts{
+<script>
+    $(function () {
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+
+        //2.初始化Button的点击事件
+        var oButtonInit = new ButtonInit();
+        oButtonInit.Init();
+    });
+
+
+    var $table = $('#tb-Customers');
+    var $url = '@Url.Action("List")';
+    var TableInit = function () {
+        var oTableInit = new Object();
+        oTableInit.Init = function () {
+            $table.bootstrapTable({
+                url: $url,
+                pagination: true, //设置为 true 会在表格底部显示分页条
+                sidePagination: 'client',//设置在哪里进行分页，可选值为 'client' 或者 'server'。设置 'server'时，必须设置 服务器数据地址（url）或者重写ajax方法
+                idField: 'id', //指定主键列
+                toolbar: '#toolbar',//一个jQuery 选择器，指明自定义的toolbar
+                pagination: true,//设置为 true 会在表格底部显示分页条
+                pageSize: 20,//每页的数据条数
+                clickToSelect: true,//设置true 将在点击行时，自动选择
+                queryParams: oTableInit.queryParams,//传递参数（*）
+                columns: [{
+                    field: 'state',
+                    checkbox: true
+                }, {
+                    field: 'id',
+                    title: 'ID'
+                }, {
+                    field: 'customerName',
+                    title: '客户名'
+                }, {
+                    field: 'hasMixStyle',
+                    title: '是否混款'
+                },
+                {
+                    field: 'createDate',
+                    title: '创建时间'
+                }],
+
+            });
+        }
+
+        //指定bootstrap-table查询参数
+        oTableInit.queryParams = function (params) {
+            var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.limit,
+                //页面大小
+                offset: params.offset,
+                //页码
+                sortfiled: params.sort,
+                //排序字段
+                sortway: params.order,
+                //升序降序
+                search: $("#txt-filter").val(),
+            };
+            return temp;
+        };
+        return oTableInit;
+    }
+
+    //bootstrap-table工具栏按钮事件初始化
+    var ButtonInit = function () {
+        var oInit = new Object();
+
+        oInit.Init = function () {
+            //初始化页面上面的按钮事件
+            $("#btn-add")
+                .click(function () {
+                    $.get('/Customers/Create',
+                        function (data) {
+                            $('#add').html(data);
+                            $('#addModal').modal('show');
+                        }
+                    );
+
+                });
+
+            $("#btn-edit")
+                .click(function () {
+                    var selectedRaido = $table.bootstrapTable('getSelections');
+                    if (selectedRaido.length === 0) {
+                        swal('错误', "请先选择要编辑的行！", 'error');
+                    } else {
+                        $.get('/Customers/edit?id=' + selectedRaido[0].id,
+                            function (data) {
+                                $('#edit').html(data);
+                                $('#editModal').modal('show');
+                            }
+                        );
+                    }
+                });
+
+            $("#btn-delete")
+                .click(function () {
+                    var selectedRaido = $table.bootstrapTable('getSelections');
+                    if (selectedRaido.length === 0) {
+                        swal('错误', "请先选择要删除的行！", 'error');
+
+                    } else {
+                        swal({
+                            title: '你确定删除码？',
+                            text: "删除后将无法恢复！",
+                            type: 'warning',
+                            showCancelButton: true,
+                            cancelButtonText: '取消',
+                            confirmButtonText: '是删除!'
+                        }).then(function () {
+                            $.get('/Customers/Delete?id=' + selectedRaido[0].id,
+                                function (data) {
+                                    swal(
+                                        '成功!',
+                                        '删除成功!',
+                                        'success'
+                                    )
+                                    $table.bootstrapTable('refresh');
+                                }
+                            );
+                        });
+                       
+                    }
+                });
+
+            $("#btn-query")
+                .click(function () {
+                    $table.bootstrapTable('refresh');
+                });
+        }
+        return oInit;
+    }
+
+</script>
+}
+
+
+
+
+
+

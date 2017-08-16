@@ -1,0 +1,9 @@
+C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.deps.json
+C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.runtimeconfig.json
+C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.runtimeconfig.dev.json
+C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.dll
+C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.pdb
+C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.dll
+C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.pdb

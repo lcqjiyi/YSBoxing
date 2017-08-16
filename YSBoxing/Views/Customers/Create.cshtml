@@ -1,0 +1,74 @@
+﻿@model YSBoxing.Core.Customer
+
+@{
+    Layout = null;
+}
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4>添加客户</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Create" id="addCustomer" onsubmit="false">
+                    <div class="form-horizontal">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="CustomerName" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="CustomerName" class="form-control" />
+                                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HasMixStyle" class="col-md-2 control-label">混款</label>
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    <input asp-for="HasMixStyle" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="button" value="保存" onclick="addCustomers()" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+function addCustomers() { 
+    $.post('/Customers/Create',
+        $("#addCustomer").serialize(),
+        function (data) {
+            if (data.error == null) {
+                swal({
+                    title: '成功',
+                    text: '客户添加成功！',
+                    timer: 2000
+                }).then(
+                    function () { $('#addModal').modal('hide');},
+                    function (dismiss) {}
+                    );
+            } else {
+                swal(
+                    '错误',
+                    data.error,
+                    'error'
+                )
+            }
+        },
+        "json"
+    );
+}
+
+</script>
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }
