@@ -7,3 +7,14 @@ C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSB
 C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.pdb
 C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.dll
 C:\Users\Administrator\Desktop\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.pdb
+F:\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.deps.json
+F:\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.runtimeconfig.json
+F:\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.runtimeconfig.dev.json
+F:\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.dll
+F:\web\YSBoxing\YSBoxing\bin\Debug\netcoreapp1.1\YSBoxing.pdb
+F:\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.csprojResolveAssemblyReference.cache
+F:\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.csproj.CoreCompileInputs.cache
+F:\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.AssemblyInfoInputs.cache
+F:\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.AssemblyInfo.cs
+F:\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.dll
+F:\web\YSBoxing\YSBoxing\obj\Debug\netcoreapp1.1\YSBoxing.pdb
